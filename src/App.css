@@ -1,0 +1,62 @@
+html {
+  margin-top: 0!important;
+}
+* {
+  font-family: 'K2D', sans-serif;
+}
+.navbar-height {
+  height: 15vh;
+}
+.navbar-width {
+  width: 8%;
+}
+img{
+  width: 100%;
+  height: 10vh;
+}
+.navbar-links {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+}
+.allorders-title-div , .allorders-title , .allorders , .single-order-products-title-div , .single-order-products-title , .single-order-products  {
+  display: flex;
+  justify-content: center;
+}
+.single-order-products-title , .allorders-title {
+  border-bottom: 1px solid black;
+}
+.order-model {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+table {
+  width: 100%;
+}
+.table-row-order {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.single-order-main-div {
+  display: flex;
+  flex-direction: column;
+}
+.single-order-name-and-shipping-div {
+  display: flex;
+  justify-content: space-around;
+  height: 25vh;
+}
+.address {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 50%;
+}
+ul {
+  padding-left: 0;
+}
+li {
+  list-style: none;
+}
