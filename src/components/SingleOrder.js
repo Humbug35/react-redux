@@ -1,33 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSingleOrder } from '../actions/fetchOrders';
-import NavBar from './Navbar';
 
 class SingleOrder extends Component {
-  constructor() {
-    super();
-    console.log('Constructor')
-  }
-
-  componentDidMount() {
-    console.log('WillMount')
+  componentWillMount() {
     this.props.dispatch(fetchSingleOrder(this.props.match.params.orderId))
   }
   render() {
-    console.log('Render')
-    let order = this.props.order;
-    console.log(order)
-        if(order.length === 0) {
-          console.log('IF')
+        if(this.props.order.length === 0) {
           return null
         }
+        let order = this.props.order;
         let address = order.address.map((address, index) => {
             return (
               <ul className="address" key={index.toString()}>
-                <li>StreetAddress: {address.streetAddress}</li>
-                <li>ZipCode: {address.zipcode}</li>
-                <li>City: {address.city}</li>
-                <li>Country: {address.country}</li>
+                <li><strong>StreetAddress:</strong> {address.streetAddress}</li>
+                <li><strong>ZipCode:</strong> {address.zipcode}</li>
+                <li><strong>City:</strong> {address.city}</li>
+                <li><strong>Country:</strong> {address.country}</li>
               </ul>
             )
         })
@@ -50,18 +40,17 @@ class SingleOrder extends Component {
         const totalPrice = totalPriceArray.reduce((acc, current) => acc + current);
      return (
         <div>
-          <NavBar />
           <div>
-                <div className="mb-5">
+                <div className="mb-5 mt-3 orderId-div">
                   <h5>OrderId: {order._id}</h5>
                 </div>
                 <div className="single-order-main-div mb-5">
                   <div className="single-order-name-and-shipping-div mb-5">
                     <div>
                       <h5>Client</h5>
-                      <p>Name: {order.fullName}</p>
-                      <p>Email: {order.email}</p>
-                      <p>PhoneNumber: 0{order.phonenumber}</p>
+                      <p><strong>Name:</strong> {order.fullName}</p>
+                      <p><strong>Email:</strong> {order.email}</p>
+                      <p><strong>PhoneNumber:</strong> 0{order.phonenumber}</p>
                     </div>
                     <div>
                       <h5>Shipping Address</h5>
@@ -91,7 +80,9 @@ class SingleOrder extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  order: state.singleOrder
+  order: state.singleOrder,
+  loading: state.isFetching,
+  error: state.error
 })
 
 export default connect(mapStateToProps)(SingleOrder);

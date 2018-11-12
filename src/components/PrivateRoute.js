@@ -1,26 +1,17 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
-// export const fakeAuth = {
-//   auth: false,
-//   signIn() {
-//     this.auth = true
-//   },
-//   signOut() {
-//     this.auth = false
-//   }
-// }
 
 export const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      localStorage.getItem('token') ? (
+      sessionStorage.getItem('token') ? (
         <Component {...props} />
       ) : (
         <Redirect
          to={{
-           pathname:'/login',
+           pathname:'/',
            state: { from: props.location }
          }}
          />

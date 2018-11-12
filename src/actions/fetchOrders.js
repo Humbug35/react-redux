@@ -1,29 +1,58 @@
-import { FETCH_ORDERS ,
-         FETCH_ORDERS_BEGIN ,
-         FETCH_ORDERS_SUCCESS ,
-         FETCH_ORDERS_FAILURE ,
-         FETCH_SINGLE_ORDER } from './types';
+import { FETCH_ORDERS_REQUEST ,
+         FETCH_ORDERS_RECEIVE ,
+         FETCH_ORDERS_FAIL ,
+         FETCH_SINGLE_ORDER_REQUEST ,
+         FETCH_SINGLE_ORDER_RECEIVE ,
+         FETCH_SINGLE_ORDER_FAIL } from './types';
 
+export const fetchOrdersRequest = () => ({
+  type: FETCH_ORDERS_REQUEST
+})
 
+export const fetchOrdersReceive = orders => ({
+  type: FETCH_ORDERS_RECEIVE,
+  payload: orders
+})
+
+export const fetchOrdersFail = error => ({
+  type: FETCH_ORDERS_FAIL,
+  payload: error
+})
+
+export const fetchSingleOrderRequest = () => ({
+  type: FETCH_SINGLE_ORDER_REQUEST
+})
+
+export const fetchSingleOrderReceive = order => ({
+  type: FETCH_SINGLE_ORDER_RECEIVE,
+  payload: order
+})
+
+export const fetchSingleOrderFail = error => ({
+  type: FETCH_SINGLE_ORDER_FAIL,
+  payload: error
+})
 
 
 
 export const fetchOrders = () => dispatch => {
+  dispatch(fetchOrdersRequest())
   return fetch('http://localhost:5000/orders')
     .then(res => res.json())
-    .then(orders => dispatch({
-      type: FETCH_ORDERS,
-      payload: orders
-    }))
+    .then(orders => {
+      dispatch(fetchOrdersReceive(orders))
+    })
+    .catch(error => {
+      dispatch(fetchOrdersFail(error))
+    })
 }
 
 export const fetchSingleOrder = (orderId) => dispatch => {
+  dispatch(fetchSingleOrderRequest())
   return fetch('http://localhost:5000/orders/'+orderId)
     .then(res => res.json())
-    .then(order => dispatch({
-      type: FETCH_SINGLE_ORDER,
-      payload: order
-    }))
+    .then(order => dispatch(fetchSingleOrderReceive(order)))
+    .catch(error => dispatch(fetchSingleOrderFail(error)))
 }
 
 
