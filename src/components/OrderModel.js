@@ -14,7 +14,7 @@ class OrderModel extends Component {
             <table>
                 <tbody>
                   <tr className="table-row-order container mt-1">
-                    <td className="col-sm allorders"><NavLink to={"/orders/"+order._id}>{order._id}</NavLink></td>
+                    <td className="col-sm allorders"><NavLink to={'/orders/' + order._id}>{order._id}</NavLink></td>
                     <td className="col-sm allorders">{order.fullName}</td>
                     <td className="col-sm allorders">{quantity}</td>
                   </tr>

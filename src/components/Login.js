@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import logo from '../images/newlogo.png';
 //import { fakeAuth } from './PrivateRoute';
 
 
@@ -8,15 +9,10 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      wrong: null,
-      token: null,
+      wrongCredentials: null,
       userInput: {
         username: '',
         password: ''
-      },
-      credentials: {
-        username: 'admin',
-        password: 'admin'
       }
     }
   }
@@ -38,9 +34,9 @@ class Login extends Component {
     })
       .then(res => res.json())
       .then(user => {
-        if(user) {
+        if(user.success) {
+          sessionStorage.setItem('token', user.token)
           this.setState({
-            token: user.token,
             userInput: {
               username: this.refs.username.value = '',
               password: this.refs.password.value = ''
@@ -48,7 +44,7 @@ class Login extends Component {
           })
         } else {
           this.setState({
-            wrong: false,
+            wrongCredentials: false,
             userInput: {
               username: this.refs.username.value = '',
               password: this.refs.password.value = ''
@@ -56,59 +52,38 @@ class Login extends Component {
           })
         }
       })
-    // if(this.state.userInput.username === this.state.credentials.username && this.state.userInput.password === this.state.credentials.password) {
-    //   fakeAuth.signIn()
-    //   fetch('http://localhost:5000/users/login', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json',
-    //                'Accept': 'application/json' },
-    //     body: JSON.stringify(this.state.userInput)
-    //   })
-    //     .then(response => response.json())
-    //     .then(user => console.log('User', user))
-    //   this.setState({
-    //     userInput: {
-    //       username: this.refs.username.value = '',
-    //       password: this.refs.password.value = ''
-    //     }
-    //   })
-    // } else {
-    //   this.setState({
-    //     wrong: false,
-    //     userInput: {
-    //       username: this.refs.username.value = '',
-    //       password: this.refs.password.value = ''
-    //     }
-    //   })
-    // }
   }
   render() {
-    console.log('Storage', localStorage)
-    console.log('State', this.state.token)
-    if(this.state.token) {
-      localStorage.setItem('token', this.state.token)
-      this.state.token = null;
+    if(sessionStorage.getItem('token')) {
       return <Redirect to='/orders' />
     }
     return (
-      <div>
-        <input
-        type="text"
-        placeholder="Username"
-        require="true"
-        ref="username"
-        onChange={this.getInputValues.bind(this)}
-        />
-        <input
-        type="password"
-        placeholder="Password"
-        require="true"
-        ref="password"
-        onChange={this.getInputValues.bind(this)}
-        />
-        <button type="submit" onClick={this.logIn.bind(this)}>Log In</button>
-        <div>{ this.state.wrong === false ? 'Wrong username or password' : null }</div>
+      <div className="login-main-div">
+        <img src={logo} alt="logo" className="logo" />
+        <form className="login-div">
+          <div className="wrong-credentials">{ this.state.wrongCredentials === false ? 'Wrong username or password' : null }</div>
+          <input
+          className="form-control form-control-lg input-field"
+          type="text"
+          placeholder="Username"
+          require="true"
+          ref="username"
+          onChange={this.getInputValues.bind(this)}
+          />
+          <input
+          className="form-control form-control-lg input-field"
+          type="password"
+          placeholder="Password"
+          require="true"
+          ref="password"
+          onChange={this.getInputValues.bind(this)}
+          />
+          <div className="login-button-div">
+            <input className="btn btn-success login-button" type="submit" value="Log In" onClick={this.logIn.bind(this)} />
+          </div>
+        </form>
       </div>
+
     )
   }
 }

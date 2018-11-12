@@ -1,24 +1,32 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import logo from '../images/logo.png';
-//import { fakeAuth } from './PrivateRoute';
+import { NavLink , Redirect } from 'react-router-dom';
+import logo from '../images/newlogo.png';
 
 
 class NavBar extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isToken: true
+    }
+  }
   logOut() {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token')
+    this.setState({
+      isToken: false
+    })
   }
   render() {
-    // if(!fakeAuth) {
-    //   return <Redirect to='/login' />
-    // }
+    if(!this.state.isToken) {
+      return <Redirect to="/" />
+    }
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary navbar-height">
           <NavLink className="navbar-brand navbar-width" to="/orders"><img src={logo} alt="logo"/></NavLink>
           <div className="navbar-nav navbar-links">
             <NavLink className="nav-item nav-link" to="/orders">All Orders</NavLink>
-            <NavLink className="nav-item nav-link" to="#">About</NavLink>
-            <NavLink to='/login'><button onClick={this.logOut.bind(this)}>Log Out</button></NavLink>
+            <NavLink className="nav-item nav-link" to="/about">About</NavLink>
+            <button onClick={this.logOut.bind(this)}>Log Out</button>
           </div>
       </nav>
     )
