@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AllOrder from './AllOrder';
 import SingleOrder from './SingleOrder';
-//import SignUp from './Register';
+import SignUp from './Register';
 import Login from './Login';
 import About from './About';
+import AuthNavBar from './AuthNavbar';
 import NavBar from './Navbar';
+import ProductList from './Products';
+import SingleProduct from './SingleProduct';
+import Footer from './Footer';
 import { PrivateRoute } from './PrivateRoute';
 
 
@@ -17,20 +21,33 @@ const LoginRoute = () => (
 
 const OrderRoute = () => (
   <div>
-    <NavBar />
+    <AuthNavBar />
     <div>
       <PrivateRoute exact path='/orders' component={AllOrder} />
       <PrivateRoute path='/orders/:orderId' component={SingleOrder} />
     </div>
+    <Footer />
+  </div>
+)
+
+const ProductRoute = () => (
+  <div>
+    <NavBar />
+    <div>
+      <Route exact path="/products" component={ProductList} />
+      <Route path="/products/:productId" component={SingleProduct} />
+    </div>
+    <Footer />
   </div>
 )
 
 const AboutRoute = () => (
   <div>
-    <NavBar />
+    <AuthNavBar />
     <div>
       <PrivateRoute path="/about" component={About} />
     </div>
+    <Footer />
   </div>
 )
 
@@ -55,6 +72,8 @@ class MainRouter extends Component {
       <BrowserRouter>
           <Switch>
             <Route exact path="/" component={LoginRoute} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/products" component={ProductRoute} />
             <Route path="/orders" component={OrderRoute} />
             <Route path="/about" component={AboutRoute} />
             <Route component={ErrorPage} />
