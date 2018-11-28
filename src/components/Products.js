@@ -1,67 +1,35 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchProducts } from '../actions/fetchProducts';
 import { NavLink } from 'react-router-dom';
-import Categories from './Categories';
-import { filterArray, addToCart } from '../helpers/functions';
 
 class ProductList extends Component {
-  constructor() {
-    super();
-    this.state = {
-      products: []
-    }
-  }
-  getProducts(query = '') {
-      return fetch('http://localhost:5000/products' + query)
-        .then(res => res.json())
-        .then(products => {
-          this.setState({
-            products: products
-          })
-        })
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     products: []
+  //   }
+  // }
+  // getProducts(query = '') {
+  //   // Fetchen ska ersättas med dispatch
+  //     return fetch('http://localhost:5000/products' + query)
+  //       .then(res => res.json())
+  //       .then(products => {
+  //         this.setState({
+  //           products: products
+  //         })
+  //       })
+  // }
   componentWillMount() {
-    this.getProducts()
+    //this.getProducts()
+    this.props.dispatch(fetchProducts())
   }
-  getUrl(array) {
-    const sortUrl = filterArray(array)
-    this.getProducts(sortUrl)
-  }
-
-  // handleCheck(e) {
-  //   let array = [];
-  //   let checks = document.getElementsByTagName('input');
-  //   for (let i = 0; i < checks.length; i++) {
-  //     if(checks[i].checked) {
-  //       array.push(checks[i].value)
-  //     }
-  //   }
-  //   this.getUrl(array)
-  // }
-  // clearFilter(e) {
-  //   let checks = document.getElementsByTagName('input');
-  //   for (let i = 0; i < checks.length; i++) {
-  //     checks[i].checked = false;
-  //   }
-  //   this.getUrl([])
-  // }
-
 
   render() {
-    if(!this.state.products) {
+    if(this.props.products.products.length === 0) {
       return null
     }
-    let bestSellerProducts = [];
-    let bestSellerOne = this.state.products[Math.floor(Math.random() * this.state.products.length)]
-    let bestSellerTwo = this.state.products[Math.floor(Math.random() * this.state.products.length)]
-    let bestSellerThree = this.state.products[Math.floor(Math.random() * this.state.products.length)]
-    let bestSellerFour = this.state.products[Math.floor(Math.random() * this.state.products.length)]
-    let bestSellerFive = this.state.products[Math.floor(Math.random() * this.state.products.length)]
-    let bestSellerSix = this.state.products[Math.floor(Math.random() * this.state.products.length)]
-    bestSellerProducts.push(bestSellerOne, bestSellerTwo, bestSellerThree, bestSellerFour, bestSellerFive, bestSellerSix)
-    if(bestSellerProducts[0] === undefined) {
-      return null
-    }
-    let bestSellers = bestSellerProducts.map((product, index) => {
+    let bestSellers = this.props.products.products.map((product, index) => {
       let replaceDollar = product.price.replace('$', '');
       let newPrice = Number(replaceDollar);
       return (
@@ -94,10 +62,9 @@ class ProductList extends Component {
     // })
 
     return (
-      <div>
-        <div className="d-flex">
-            <Categories handleUrl={this.getUrl.bind(this)} />
-            <div className="products-div mt-5 d-flex flex-wrap justify-content-center col-7">
+      <div className="category-products">
+        <div className="d-flex justify-content-center">
+            <div className="products-div mt-5 d-flex flex-wrap justify-content-center col-9">
               {bestSellers}
             </div>
       </div>
@@ -105,4 +72,7 @@ class ProductList extends Component {
     )
   }
 }
-export default ProductList;
+const mapStateToProps = state => ({
+  products: state.products
+})
+export default connect(mapStateToProps)(ProductList);

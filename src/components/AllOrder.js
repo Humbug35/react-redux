@@ -5,14 +5,15 @@ import OrderModel from './OrderModel';
 //import Footer from './Footer';
 
 class AllOrder extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.dispatch(fetchOrders())
   }
   render() {
-    if(this.props.orders.length === 0){
+    if(this.props.orders.orders.length === 0){
       return null
     }
-    const orders = this.props.orders.map(order => {
+
+    const orders = this.props.orders.orders.map(order => {
       return <OrderModel order={order} key={order._id}/>
     })
     return (

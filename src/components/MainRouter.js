@@ -6,10 +6,12 @@ import SignUp from './Register';
 import Login from './Login';
 import About from './About';
 import AuthNavBar from './AuthNavbar';
-import NavBar from './Navbar';
 import ProductList from './Products';
 import SingleProduct from './SingleProduct';
+import Category from './Category';
 import Footer from './Footer';
+import Header from './Header';
+import CheckOut from './CheckOut';
 import { PrivateRoute } from './PrivateRoute';
 
 
@@ -31,11 +33,21 @@ const OrderRoute = () => (
 )
 
 const ProductRoute = () => (
-  <div>
-    <NavBar />
-    <div>
+  <div className="routediv">
+    <Header />
+    <div className="d-flex routedivpath">
       <Route exact path="/products" component={ProductList} />
       <Route path="/products/:productId" component={SingleProduct} />
+    </div>
+    <Footer />
+  </div>
+)
+
+const CategoryRoute = () => (
+  <div className="routediv">
+    <Header />
+    <div className="d-flex routedivpath">
+      <Route path="/category/:category" component={Category} />
     </div>
     <Footer />
   </div>
@@ -74,8 +86,10 @@ class MainRouter extends Component {
             <Route exact path="/" component={LoginRoute} />
             <Route path="/signup" component={SignUp} />
             <Route path="/products" component={ProductRoute} />
+            <Route path="/category" component={CategoryRoute} />
             <Route path="/orders" component={OrderRoute} />
             <Route path="/about" component={AboutRoute} />
+            <Route path="/checkout" component={CheckOut} />
             <Route component={ErrorPage} />
           </Switch>
       </BrowserRouter>

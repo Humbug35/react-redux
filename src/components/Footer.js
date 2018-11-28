@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Footer extends Component {
   render() {
     return (
-        <footer className="page-footer font-small bg-primary pt-4">
+        <footer className="font-small pt-4 footer">
             <div className="container">
               <ul className="list-unstyled list-inline text-center">
                 <li className="list-inline-item">
