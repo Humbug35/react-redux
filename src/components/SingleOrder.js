@@ -39,8 +39,8 @@ class SingleOrder extends Component {
         })
         const totalPrice = totalPriceArray.reduce((acc, current) => acc + current);
      return (
-        <div>
-          <div>
+        <div className="d-flex flex-column">
+
                 <div className="mb-5 mt-3 orderId-div">
                   <h5>OrderId: {order._id}</h5>
                 </div>
@@ -73,7 +73,7 @@ class SingleOrder extends Component {
                 <div className="mt-5">
                   <p className="d-flex justify-content-end container">TotalPrice: ${totalPrice.toFixed(2)}</p>
                 </div>
-              </div>
+
         </div>
     )
   }

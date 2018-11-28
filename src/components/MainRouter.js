@@ -16,7 +16,7 @@ import { PrivateRoute } from './PrivateRoute';
 
 
 const LoginRoute = () => (
-  <div className="login-page-div">
+  <div className="login-page-div login-background">
      <Route path="/" component={Login} />
   </div>
 )
@@ -24,7 +24,7 @@ const LoginRoute = () => (
 const OrderRoute = () => (
   <div>
     <AuthNavBar />
-    <div>
+    <div className="route-order-path-div">
       <PrivateRoute exact path='/orders' component={AllOrder} />
       <PrivateRoute path='/orders/:orderId' component={SingleOrder} />
     </div>
@@ -33,9 +33,9 @@ const OrderRoute = () => (
 )
 
 const ProductRoute = () => (
-  <div className="routediv">
+  <div>
     <Header />
-    <div className="d-flex routedivpath">
+    <div className="d-flex route-products-path-div">
       <Route exact path="/products" component={ProductList} />
       <Route path="/products/:productId" component={SingleProduct} />
     </div>
@@ -46,7 +46,7 @@ const ProductRoute = () => (
 const CategoryRoute = () => (
   <div className="routediv">
     <Header />
-    <div className="d-flex routedivpath">
+    <div className="d-flex route-products-path-div">
       <Route path="/category/:category" component={Category} />
     </div>
     <Footer />
