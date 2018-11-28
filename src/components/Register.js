@@ -19,6 +19,7 @@ class SignUp extends Component {
     }
   }
   render() {
+    console.log('Props', this.props.register)
     return (
       <div>
         <input

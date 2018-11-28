@@ -3,13 +3,7 @@ import { NavLink , Redirect } from 'react-router-dom';
 import logo from '../images/newlogo.png';
 
 
-class NavBar extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isToken: true
-    }
-  }
+class AuthNavBar extends Component {
   logOut() {
     sessionStorage.removeItem('token')
     this.setState({
@@ -17,7 +11,7 @@ class NavBar extends Component {
     })
   }
   render() {
-    if(!this.state.isToken) {
+    if(!sessionStorage.getItem('token')) {
       return <Redirect to="/" />
     }
     return (
@@ -32,4 +26,4 @@ class NavBar extends Component {
     )
   }
 }
-export default NavBar;
+export default AuthNavBar;

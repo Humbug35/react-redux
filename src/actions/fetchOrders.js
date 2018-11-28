@@ -1,9 +1,7 @@
 import { FETCH_ORDERS_REQUEST ,
          FETCH_ORDERS_RECEIVE ,
          FETCH_ORDERS_FAIL ,
-         FETCH_SINGLE_ORDER_REQUEST ,
-         FETCH_SINGLE_ORDER_RECEIVE ,
-         FETCH_SINGLE_ORDER_FAIL } from './types';
+         } from './types';
 
 export const fetchOrdersRequest = () => ({
   type: FETCH_ORDERS_REQUEST
@@ -19,41 +17,54 @@ export const fetchOrdersFail = error => ({
   payload: error
 })
 
-export const fetchSingleOrderRequest = () => ({
-  type: FETCH_SINGLE_ORDER_REQUEST
-})
+export const fetchOrders = (orderId = '') => {
+  return dispatch => {
+    dispatch(fetchOrdersRequest())
+    return fetch('http://localhost:5000/orders/'+orderId)
+      .then(res => res.json())
+      .then(orders => {
+        dispatch(fetchOrdersReceive(orders))
+      })
+      .catch(error => {
+        dispatch(fetchOrdersFail(error))
+      })
+    }
+  }
 
-export const fetchSingleOrderReceive = order => ({
-  type: FETCH_SINGLE_ORDER_RECEIVE,
-  payload: order
-})
-
-export const fetchSingleOrderFail = error => ({
-  type: FETCH_SINGLE_ORDER_FAIL,
-  payload: error
-})
 
 
-
-export const fetchOrders = () => dispatch => {
-  dispatch(fetchOrdersRequest())
-  return fetch('http://localhost:5000/orders')
-    .then(res => res.json())
-    .then(orders => {
-      dispatch(fetchOrdersReceive(orders))
-    })
-    .catch(error => {
-      dispatch(fetchOrdersFail(error))
-    })
-}
-
-export const fetchSingleOrder = (orderId) => dispatch => {
-  dispatch(fetchSingleOrderRequest())
-  return fetch('http://localhost:5000/orders/'+orderId)
-    .then(res => res.json())
-    .then(order => dispatch(fetchSingleOrderReceive(order)))
-    .catch(error => dispatch(fetchSingleOrderFail(error)))
-}
+// export const fetchOrders = () => dispatch => {
+//   dispatch(fetchOrdersRequest())
+//   return fetch('http://localhost:5000/orders')
+//     .then(res => res.json())
+//     .then(orders => {
+//       console.log(orders)
+//       dispatch(fetchOrdersReceive(orders))
+//     })
+//     .catch(error => {
+//       dispatch(fetchOrdersFail(error))
+//     })
+//   }
+// export function fetchSingleOrder(orderId) {
+//   return dispatch => {
+//     return fetch('http://localhost:5000/orders/'+orderId)
+//       .then(res => res.json())
+//       .then(order => {
+//         console.log(order)
+//         dispatch(fetchSingleOrderReceive())
+//       })
+//       .catch(error => {
+//         dispatch(fetchSingleOrderFail())
+//       })
+//   }
+// }
+// export const fetchSingleOrder = (orderId) => dispatch => {
+//   dispatch(fetchSingleOrderRequest())
+//   return fetch('http://localhost:5000/orders/'+orderId)
+//     .then(res => res.json())
+//     .then(order => dispatch(fetchSingleOrderReceive(order)))
+//     .catch(error => dispatch(fetchSingleOrderFail(error)))
+// }
 
 
 // export const postRegister = (registerObj) => dispatch => {

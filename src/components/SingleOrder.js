@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSingleOrder } from '../actions/fetchOrders';
+import { fetchOrders } from '../actions/fetchOrders';
 
 class SingleOrder extends Component {
   componentWillMount() {
-    this.props.dispatch(fetchSingleOrder(this.props.match.params.orderId))
+    this.props.dispatch(fetchOrders(this.props.match.params.orderId))
   }
   render() {
-        if(this.props.order.length === 0) {
+        if(this.props.order.orders.length === 0) {
           return null
         }
-        let order = this.props.order;
+        let order = this.props.order.orders;
         let address = order.address.map((address, index) => {
             return (
               <ul className="address" key={index.toString()}>
@@ -80,7 +80,7 @@ class SingleOrder extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  order: state.singleOrder,
+  order: state.orders,
   loading: state.isFetching,
   error: state.error
 })
