@@ -5,7 +5,7 @@ export const postRegisterBegin = () => ({
 })
 export const postRegisterSuccess = user => ({
   type: POST_REGISTER_SUCCESS,
-  payload: user
+  user
 })
 export const postRegisterFail = error => ({
   type: POST_REGISTER_FAIL,

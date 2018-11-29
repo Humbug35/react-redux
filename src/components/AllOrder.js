@@ -17,15 +17,13 @@ class AllOrder extends Component {
       return <OrderModel order={order} key={order._id}/>
     })
     return (
-      <div>
+      <div className="d-flex flex-column">
         <div className="allorders-title-div container mt-5">
           <h4 className="col-sm allorders-title">OrderId</h4>
           <h4 className="col-sm allorders-title">Name</h4>
           <h4 className="col-sm allorders-title">Total Products</h4>
         </div>
-        <div>
-          {orders}
-        </div>
+        {orders}
       </div>
     )
   }

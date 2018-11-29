@@ -7,8 +7,14 @@ html {
 body {
   background-color: #FFFFFF;
 }
-.routedivpath{
+.route-order-path-div{
   min-height: 73.1vh;
+}
+.route-products-path-div{
+  min-height: 73.1vh;
+}
+.login-background{
+  background-color: #2E3373;
 }
 .login-page-div {
   height: 100vh;
@@ -21,8 +27,14 @@ body {
   flex-direction: column;
   justify-content: space-around;
 }
+.loggan{
+  display: flex;
+  align-items: flex-end;
+  height: 55%;
+}
 .logo {
-  height: 28vh;
+  width: 115%;
+  height: 40%
 }
 .login-div {
   height: 25vh;
@@ -45,6 +57,7 @@ body {
 }
 .login-button {
   width: 30%;
+  color: #FFFFFF!important;
 }
 .navbar-height {
   height: 15vh;

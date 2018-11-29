@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import logo from '../images/newlogo.png';
+import logo from '../images/newLogo2.png';
 
 
 
@@ -58,7 +58,9 @@ class Login extends Component {
     }
     return (
       <div className="login-main-div">
+        <div className="loggan">
         <img src={logo} alt="logo" className="logo" />
+        </div>
         <form className="login-div">
           <div className="wrong-credentials">{ this.state.wrongCredentials === false ? 'Wrong username or password' : null }</div>
           <input

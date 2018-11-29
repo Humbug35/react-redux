@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink , Redirect } from 'react-router-dom';
-import logo from '../images/newlogo.png';
+import logo from '../images/newLogo2.png';
 
 
 class AuthNavBar extends Component {
@@ -15,7 +15,7 @@ class AuthNavBar extends Component {
       return <Redirect to="/" />
     }
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary navbar-height">
+      <nav className="navbar navbar-expand-lg navbar-height">
           <NavLink className="navbar-brand navbar-width" to="/orders"><img src={logo} alt="logo"/></NavLink>
           <div className="navbar-nav navbar-links">
             <NavLink className="nav-item nav-link" to="/orders">All Orders</NavLink>
