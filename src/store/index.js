@@ -4,6 +4,7 @@ import { ordersReducer as orders } from '../reducers/ordersReducer';
 import { categoryReducer as categories } from '../reducers/categoryReducer';
 import { productsReducer as products } from '../reducers/productReducer';
 import { cartReducer as cart } from '../reducers/cartReducer';
+import { adminLoginReducer as adminUser } from '../reducers/adminLoginReducer';
 import { combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 //import { composeWithDevTools } from 'redux-devtools-extension';
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   orders,
   categories,
   products,
-  cart
+  cart,
+  adminUser
 })
 
 
