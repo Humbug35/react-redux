@@ -20,13 +20,8 @@ class AdminLogin extends Component {
     }
   }
   render() {
-    console.log('Render')
-    console.log(this.props.admin)
-    console.log('Storage', sessionStorage.getItem('token'))
     if(this.props.admin.adminUser !== null) {
-      console.log('IF')
       if(sessionStorage.getItem('token')) {
-        console.log('Session')
         return <Redirect to="/orders" />
       }
     }
