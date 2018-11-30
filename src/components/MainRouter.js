@@ -60,6 +60,16 @@ const CategoryRoute = () => (
   </div>
 )
 
+const CheckoutRoute = () => (
+  <div>
+    <Header />
+    <div>
+      <Route path="/checkout" component={CheckOut} />
+    </div>
+    <Footer />
+  </div>
+)
+
 const AboutRoute = () => (
   <div>
     <AuthNavBar />
@@ -97,7 +107,7 @@ class MainRouter extends Component {
             <Route path="/category" component={CategoryRoute} />
             <Route path="/orders" component={OrderRoute} />
             <Route path="/about" component={AboutRoute} />
-            <Route path="/checkout" component={CheckOut} />
+            <Route path="/checkout" component={CheckoutRoute} />
             <Route component={ErrorPage} />
           </Switch>
       </BrowserRouter>
