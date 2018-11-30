@@ -3,7 +3,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AllOrder from './AllOrder';
 import SingleOrder from './SingleOrder';
 import SignUp from './Register';
-import Login from './Login';
+//import Login from './Login';
+import AdminLogin from './AdminLogin';
 import About from './About';
 import AuthNavBar from './AuthNavbar';
 import ProductList from './Products';
@@ -15,9 +16,15 @@ import CheckOut from './CheckOut';
 import { PrivateRoute } from './PrivateRoute';
 
 
-const LoginRoute = () => (
+// const LoginRoute = () => (
+//   <div className="login-page-div login-background">
+//      <Route path="/" component={Login} />
+//   </div>
+// )
+
+const AdminLoginRoute = () => (
   <div className="login-page-div login-background">
-     <Route path="/" component={Login} />
+     <Route path="/admin-login" component={AdminLogin} />
   </div>
 )
 
@@ -83,7 +90,8 @@ class MainRouter extends Component {
     return (
       <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={LoginRoute} />
+
+            <Route exact path="/admin-login" component={AdminLoginRoute} />
             <Route path="/signup" component={SignUp} />
             <Route path="/products" component={ProductRoute} />
             <Route path="/category" component={CategoryRoute} />

@@ -12,7 +12,7 @@ class AuthNavBar extends Component {
   }
   render() {
     if(!sessionStorage.getItem('token')) {
-      return <Redirect to="/" />
+      return <Redirect to="/admin-login" />
     }
     return (
       <nav className="navbar navbar-expand-lg navbar-height">
