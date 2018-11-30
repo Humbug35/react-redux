@@ -53,7 +53,7 @@ const ProductRoute = () => (
 const CategoryRoute = () => (
   <div className="routediv">
     <Header />
-    <div className="d-flex route-products-path-div">
+    <div className="d-flex route-checkout-path-div">
       <Route path="/category/:category" component={Category} />
     </div>
     <Footer />
@@ -63,7 +63,7 @@ const CategoryRoute = () => (
 const CheckoutRoute = () => (
   <div>
     <Header />
-    <div>
+    <div className="route-checkout-path-div">
       <Route path="/checkout" component={CheckOut} />
     </div>
     <Footer />

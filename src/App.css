@@ -7,7 +7,60 @@ html {
 body {
   background-color: #FFFFFF;
 }
-.route-order-path-div{
+label{
+  display: block;
+  margin: 0;
+}
+.place-order-button{
+  width: 30%;
+  height: 5vh;
+}
+.checkout-products-div{
+  border: 1px solid gainsboro;
+  height: 40vh;
+  width: 80%;
+  margin-top: 9%;
+  overflow: hidden;
+}
+.checkout-div{
+  min-height: 35vh;
+}
+.checkout-user-info{
+  height: 75vh;
+  flex: 4;
+}
+.checkout-products{
+  flex: 2;
+}
+.checkout-nav-div{
+  margin-top: 2%;
+  margin-bottom: 8%;
+}
+.checkout-nav{
+  width: 25%;
+}
+.checkout-payment-title{
+  width: 49%;
+}
+.input-field-payment{
+  width: 64%;
+}
+.input-field-payment-myc{
+  width: 20%;
+  margin-right: 2%;
+}
+#pills-TabContent{
+  min-height: 86%;
+}
+.checkout-div-one{
+  height: 40vh;
+  width: 60%;
+}
+ .checkout-div-two{
+   height: 25vh;
+   margin-left: 30%;
+ }
+.route-order-path-div , .route-checkout-path-div{
   min-height: 73.1vh;
 }
 .route-products-path-div{
