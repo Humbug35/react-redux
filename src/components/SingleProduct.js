@@ -52,7 +52,8 @@ class SingleProduct extends Component {
     product_name: product.product_name,
     price: newPrice,
     Category: product.Category,
-    quantity: Number(this.refs.quantity.value)
+    quantity: Number(this.refs.quantity.value),
+    totalPrice: Number(this.refs.quantity.value) * newPrice
   }
   console.log('Product', product)
   console.log('NewProduct', newProduct)

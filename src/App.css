@@ -18,7 +18,7 @@ label{
 .checkout-products-div{
   border: 1px solid gainsboro;
   height: 40vh;
-  width: 80%;
+  width: 90%;
   margin-top: 9%;
   overflow: hidden;
 }
@@ -59,6 +59,19 @@ label{
  .checkout-div-two{
    height: 25vh;
    margin-left: 30%;
+ }
+ .checkout-cart-product-name{
+   width: 26%;
+ }
+ .checkout-cart-product-price{
+   width: 16%;
+ }
+ .checkout-quantity-product{
+   height: 3vh;
+   width: 8%;
+ }
+ .send-order-total{
+   width: 80%;
  }
 .route-order-path-div , .route-checkout-path-div{
   min-height: 73.1vh;
