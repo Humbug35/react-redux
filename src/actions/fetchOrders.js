@@ -1,6 +1,9 @@
 import { FETCH_ORDERS_REQUEST ,
          FETCH_ORDERS_RECEIVE ,
          FETCH_ORDERS_FAIL ,
+         POST_ORDER_REQUEST ,
+         POST_ORDER_SUCCESS ,
+         POST_ORDER_FAIL
          } from './types';
 
 export const fetchOrdersRequest = () => ({
@@ -17,6 +20,20 @@ export const fetchOrdersFail = error => ({
   payload: error
 })
 
+export const postOrderRequest = () => ({
+  type: POST_ORDER_REQUEST
+})
+
+export const postOrderSuccess = order => ({
+  type: POST_ORDER_SUCCESS,
+  order
+})
+
+export const postOrderFail = error => ({
+  type: POST_ORDER_FAIL,
+  error
+})
+
 export const fetchOrders = (orderId = '') => {
   return dispatch => {
     dispatch(fetchOrdersRequest())
@@ -27,6 +44,27 @@ export const fetchOrders = (orderId = '') => {
       })
       .catch(error => {
         dispatch(fetchOrdersFail(error))
+      })
+    }
+  }
+
+  export const postOrder = (order) => {
+    return dispatch => {
+      console.log('Order', order)
+      dispatch(postOrderRequest())
+      return fetch('http://localhost:5000/orders', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(order)
+      })
+      .then(res => res.json())
+      .then(order => {
+        console.log('Thenorder', order)
+        dispatch(postOrderSuccess(order))
+      })
+      .catch(error => {
+        console.log('Catch')
+        dispatch(postOrderFail(error))
       })
     }
   }
