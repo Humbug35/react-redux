@@ -62,13 +62,9 @@ class ProductList extends Component {
     // })
 
     return (
-      <div className="category-products">
-        <div className="d-flex justify-content-center">
-            <div className="products-div mt-5 d-flex flex-wrap justify-content-center col-9">
+            <div className="products-div mt-5 d-flex flex-wrap col-9">
               {bestSellers}
             </div>
-      </div>
-    </div>
     )
   }
 }

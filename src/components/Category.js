@@ -37,7 +37,7 @@ componentDidUpdate (prevProps) {
     return (
             <div className="d-flex flex-column align-items-center justify-content-start col-12">
               <h3 className="mt-4 d-flex justify-content-center">{categoryTitle.charAt(0).toUpperCase() + categoryTitle.substr(1)}</h3>
-              <div className="mt-5 d-flex flex-wrap col-9">
+              <div className="mt-5 d-flex flex-wrap col-9 products-div">
                 {products}
               </div>
             </div>
