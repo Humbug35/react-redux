@@ -73,6 +73,14 @@ label{
  .send-order-total{
    width: 80%;
  }
+ .no-items-in-cart{
+   height: 75vh;
+   width: 100%;
+   font-size: 138%;
+ }
+ .empty-cart-img{
+   
+ }
 .route-order-path-div , .route-checkout-path-div , .route-products-path-div{
   min-height: 76.2vh;
 }

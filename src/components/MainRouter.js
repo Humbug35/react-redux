@@ -72,9 +72,9 @@ const CheckoutRoute = () => (
 
 const AboutRoute = () => (
   <div>
-    <AuthNavBar />
+    <Header />
     <div>
-      <PrivateRoute path="/about" component={About} />
+      <Route path="/about" component={About} />
     </div>
     <Footer />
   </div>

@@ -26,7 +26,8 @@ export const postOrderRequest = () => ({
 
 export const postOrderSuccess = order => ({
   type: POST_ORDER_SUCCESS,
-  order
+  order,
+  orderId: order.orderId
 })
 
 export const postOrderFail = error => ({
