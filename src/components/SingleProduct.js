@@ -8,7 +8,7 @@ class SingleProduct extends Component {
   componentWillMount() {
     this.props.dispatch(fetchProducts(this.props.match.params.productId))
   }
-  addToCartTest(product) {
+  addProductToCart(product) {
     // let cart = JSON.parse(localStorage.getItem('cartProducts')) || [];
     // let quantity = Number(this.refs.quantity.value)
     // let replaceDollar = product.price.replace('$', '');
@@ -55,8 +55,6 @@ class SingleProduct extends Component {
     quantity: Number(this.refs.quantity.value),
     totalPrice: Number(this.refs.quantity.value) * newPrice
   }
-  console.log('Product', product)
-  console.log('NewProduct', newProduct)
   this.props.dispatch(addToCart(newProduct))
   }
   render() {
@@ -78,7 +76,7 @@ class SingleProduct extends Component {
           utan även övergången till elektronisk typografi utan större förändringar.
           Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker.</p>
           <div className="d-flex align-items-center mt-3">
-            <button className="btn btn-success mt-5 mr-5" onClick={this.addToCartTest.bind(this, product)}>Add To Cart</button>
+            <button className="btn btn-success mt-5 mr-5" onClick={this.addProductToCart.bind(this, product)}>Add To Cart</button>
             <input type="number" ref="quantity" className="col-2 mt-5 mr-5 form-control" defaultValue="1"/>
             <p className="mt-5 single-product-price">{product.price}</p>
           </div>

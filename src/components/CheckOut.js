@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { postOrder } from '../actions/fetchOrders';
 
@@ -7,12 +8,10 @@ class CheckOut extends Component {
   constructor() {
     super();
     this.state = {
-      isValid: null
+      isValid: null,
+      isOpen: false,
+      isDisabled: true
     }
-  }
-  componentDidMount() {
-    console.log('Checkout', this.props.cart.cart)
-    console.log(this.props.cart.cart)
   }
   getInputValues(e) {
     e.preventDefault();
@@ -64,72 +63,49 @@ class CheckOut extends Component {
 
          this.refs.userinfoform.reset()
          this.refs.cardinfoform.reset()
-         this.setState({
-           isValid: true
-         })
 
-         setTimeout(() => {
-            this.props.dispatch(postOrder(order))
-         }, 5000)
+          this.props.dispatch(postOrder(order))
+          this.setState({
+            isValid: true,
+            isOpen: !this.state.isOpen
+          })
+
        }
 
   }
+  handleChange(e) {
+    e.preventDefault();
+    if(this.refs.userinfofullname.value &&
+       this.refs.email.value &&
+       this.refs.phone.value &&
+       this.refs.streetaddress.value &&
+       this.refs.city.value &&
+       this.refs.zipcode.value &&
+       this.refs.country.value &&
+       this.refs.paymentfullname.value &&
+       this.refs.cardnumber.value &&
+       this.refs.cardinfomonth.value.length === 2 &&
+       this.refs.cardinfoyear.value.length === 4 &&
+       this.refs.cardinfocvc.value.length === 3) {
+         return this.setState({
+           isDisabled: false
+         })
+       }
+  }
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    })
+  }
+
 
   render() {
     const { cart } = this.props.cart;
-    console.log(this.state.isValid)
+    if(!this.state.isOpen) {
     if(cart.length === 0) {
       return (
         <div className="d-flex">
-          <div className="d-flex flex-column checkout-user-info">
-            <div className="d-flex justify-content-center checkout-nav-div">
-              <ul className="nav nav-pills d-flex justify-content-around checkout-nav" id="pills-tab" role="tablist">
-                <li className="nav-item">
-                  <a className="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">UserInfo</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Payment</a>
-                </li>
-              </ul>
-            </div>
-            <div className="tab-content d-flex flex-column align-items-center justify-content-start" id="pills-TabContent">
-              { this.state.isValid === false ? <p>All fields are required</p> : null }
-              <form className="tab-pane fade show active checkout-div-one" id="pills-home" ref="userinfoform" role="tabpanel" aria-labelledby="pills-home-tab">
-                <label htmlFor="fullname">Full Name</label>
-                <input className="form-control form-control-log" type="text" id="fullname" ref="userinfofullname" required />
-                <label htmlFor="email">Email</label>
-                <input className="form-control form-control-log" type="email" id="email" ref="email" required />
-                <label htmlFor="phone">PhoneNumber</label>
-                <input className="form-control form-control-log" type="number" id="phone" ref="phone" required />
-                <label htmlFor="street">Street Address</label>
-                <input className="form-control form-control-log" type="text" id="street" ref="streetaddress" required />
-                <label htmlFor="city">City</label>
-                <input className="form-control form-control-log" type="text" id="city" ref="city" required />
-                <label htmlFor="zipcode">Zip Code</label>
-                <input className="form-control form-control-log" type="number" id="zipcode" ref="zipcode" required />
-                <label htmlFor="country">Country</label>
-                <input className="form-control form-control-log" type="text" id="country" ref="country" required />
-              </form>
-              <form className="tab-pane fade checkout-div-two" id="pills-profile" ref="cardinfoform" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <label htmlFor="card-name">Full Name</label>
-                <input className="form-control mb-3 input-field-payment" type="text" id="card-name" ref="paymentfullname" required />
-                <label htmlFor="card-number">Card Number</label>
-                <input className="form-control mb-3 input-field-payment" type="number" id="card-number" ref="cardnumber" required />
-                <span className="d-flex justify-content-between checkout-payment-title">
-                  <label>Expiration</label>
-                  <label>CVC</label>
-                </span>
-                <span className="d-flex justify-content-start">
-                  <input className="form-control input-field-payment-myc" type="number" placeholder="MM" ref="cardinfomonth" required />
-                  <input className="form-control input-field-payment-myc" type="number" placeholder="YYYY" ref="cardinfoyear" required />
-                  <input className="form-control input-field-payment-myc" type="number" placeholder="cvc" ref="cardinfocvc" required />
-                </span>
-              </form>
-            </div>
-          </div>
-          <div className="checkout-products d-flex flex-column justify-content-around">
-            <p>You have no items in your cart, go back and add some stuff to your cart</p>
-          </div>
+          <p className="d-flex justify-content-center">Your cart is empty, go back and add some stuff to your cart</p>
         </div>
       )
     } else {
@@ -161,33 +137,33 @@ class CheckOut extends Component {
               { this.state.isValid === false ? <p>All fields are required</p> : null }
               <form className="tab-pane fade show active checkout-div-one" id="pills-home" ref="userinfoform" role="tabpanel" aria-labelledby="pills-home-tab">
                 <label htmlFor="fullname">Full Name</label>
-                <input className="form-control form-control-log" type="text" id="fullname" ref="userinfofullname" required />
+                <input className="form-control form-control-log" type="text" id="fullname" ref="userinfofullname" required onChange={this.handleChange.bind(this)} />
                 <label htmlFor="email">Email</label>
-                <input className="form-control form-control-log" type="email" id="email" ref="email" required />
+                <input className="form-control form-control-log" type="email" id="email" ref="email" required onChange={this.handleChange.bind(this)} />
                 <label htmlFor="phone">PhoneNumber</label>
-                <input className="form-control form-control-log" type="number" id="phone" ref="phone" required />
+                <input className="form-control form-control-log" type="number" id="phone" ref="phone" required onChange={this.handleChange.bind(this)} />
                 <label htmlFor="street">Street Address</label>
-                <input className="form-control form-control-log" type="text" id="street" ref="streetaddress" required />
+                <input className="form-control form-control-log" type="text" id="street" ref="streetaddress" required onChange={this.handleChange.bind(this)} />
                 <label htmlFor="city">City</label>
-                <input className="form-control form-control-log" type="text" id="city" ref="city" required />
+                <input className="form-control form-control-log" type="text" id="city" ref="city" required onChange={this.handleChange.bind(this)} />
                 <label htmlFor="zipcode">Zip Code</label>
-                <input className="form-control form-control-log" type="number" id="zipcode" ref="zipcode" required />
+                <input className="form-control form-control-log" type="number" id="zipcode" ref="zipcode" required onChange={this.handleChange.bind(this)} />
                 <label htmlFor="country">Country</label>
-                <input className="form-control form-control-log" type="text" id="country" ref="country" required />
+                <input className="form-control form-control-log" type="text" id="country" ref="country" required onChange={this.handleChange.bind(this)} />
               </form>
               <form className="tab-pane fade checkout-div-two" id="pills-profile" ref="cardinfoform" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <label htmlFor="card-name">Full Name</label>
-                <input className="form-control mb-3 input-field-payment" type="text" id="card-name" ref="paymentfullname" required />
+                <input className="form-control mb-3 input-field-payment" type="text" id="card-name" ref="paymentfullname" required onChange={this.handleChange.bind(this)} />
                 <label htmlFor="card-number">Card Number</label>
-                <input className="form-control mb-3 input-field-payment" type="number" id="card-number" ref="cardnumber" required />
+                <input className="form-control mb-3 input-field-payment" type="number" id="card-number" ref="cardnumber" required onChange={this.handleChange.bind(this)} />
                 <span className="d-flex justify-content-between checkout-payment-title">
                   <label>Expiration</label>
                   <label>CVC</label>
                 </span>
                 <span className="d-flex justify-content-start">
-                  <input className="form-control input-field-payment-myc" type="number" placeholder="MM" ref="cardinfomonth" required />
-                  <input className="form-control input-field-payment-myc" type="number" placeholder="YYYY" ref="cardinfoyear" required />
-                  <input className="form-control input-field-payment-myc" type="number" placeholder="cvc" ref="cardinfocvc" required />
+                  <input className="form-control input-field-payment-myc" type="number" placeholder="MM" ref="cardinfomonth" required onChange={this.handleChange.bind(this)} />
+                  <input className="form-control input-field-payment-myc" type="number" placeholder="YYYY" ref="cardinfoyear" required onChange={this.handleChange.bind(this)} />
+                  <input className="form-control input-field-payment-myc" type="number" placeholder="cvc" ref="cardinfocvc" required onChange={this.handleChange.bind(this)} />
                 </span>
               </form>
             </div>
@@ -199,15 +175,26 @@ class CheckOut extends Component {
                 <p>Price</p>
                 <p>Quantity</p>
               </div>
-              { !this.state.isValid ? cartProducts : null }
+              {cartProducts}
             </div>
-            { this.state.isValid ? <p>Your order are send</p> : null }
             <div className="d-flex justify-content-between send-order-total">
-              <button className="btn btn-success place-order-button" onClick={this.getInputValues.bind(this)}>Send Order</button>
+              <button className="btn btn-success place-order-button" disabled={this.state.isDisabled} onClick={this.getInputValues.bind(this)}>Send Order</button>
               <p className="d-flex align-items-center mb-0">Total: ${!this.state.isValid ? totalPrice.toFixed(2) : 0}</p>
             </div>
           </div>
+
         </div>
+      )
+    }} else {
+      return (
+        <Modal isOpen={this.state.isOpen} toggle={this.getInputValues.bind(this)}>
+        <ModalBody>
+          Your order are send
+        </ModalBody>
+        <ModalFooter>
+          <Button color="success" onClick={this.toggle.bind(this)}>OK</Button>{' '}
+        </ModalFooter>
+      </Modal>
       )
     }
   }
@@ -217,3 +204,58 @@ const mapStateToProps = state => ({
   cart: state.cart
 })
 export default connect(mapStateToProps)(CheckOut);
+
+
+
+
+
+
+// <div className="d-flex flex-column checkout-user-info">
+//   <div className="d-flex justify-content-center checkout-nav-div">
+//     <ul className="nav nav-pills d-flex justify-content-around checkout-nav" id="pills-tab" role="tablist">
+//       <li className="nav-item">
+//         <a className="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">UserInfo</a>
+//       </li>
+//       <li className="nav-item">
+//         <a className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Payment</a>
+//       </li>
+//     </ul>
+//   </div>
+//   <div className="tab-content d-flex flex-column align-items-center justify-content-start" id="pills-TabContent">
+//     { this.state.isValid === false ? <p>All fields are required</p> : null }
+//     <form className="tab-pane fade show active checkout-div-one" id="pills-home" ref="userinfoform" role="tabpanel" aria-labelledby="pills-home-tab">
+//       <label htmlFor="fullname">Full Name</label>
+//       <input className="form-control form-control-log" type="text" id="fullname" ref="userinfofullname" required />
+//       <label htmlFor="email">Email</label>
+//       <input className="form-control form-control-log" type="email" id="email" ref="email" required />
+//       <label htmlFor="phone">PhoneNumber</label>
+//       <input className="form-control form-control-log" type="number" id="phone" ref="phone" required />
+//       <label htmlFor="street">Street Address</label>
+//       <input className="form-control form-control-log" type="text" id="street" ref="streetaddress" required />
+//       <label htmlFor="city">City</label>
+//       <input className="form-control form-control-log" type="text" id="city" ref="city" required />
+//       <label htmlFor="zipcode">Zip Code</label>
+//       <input className="form-control form-control-log" type="number" id="zipcode" ref="zipcode" required />
+//       <label htmlFor="country">Country</label>
+//       <input className="form-control form-control-log" type="text" id="country" ref="country" required />
+//     </form>
+//     <form className="tab-pane fade checkout-div-two" id="pills-profile" ref="cardinfoform" role="tabpanel" aria-labelledby="pills-profile-tab">
+//       <label htmlFor="card-name">Full Name</label>
+//       <input className="form-control mb-3 input-field-payment" type="text" id="card-name" ref="paymentfullname" required />
+//       <label htmlFor="card-number">Card Number</label>
+//       <input className="form-control mb-3 input-field-payment" type="number" id="card-number" ref="cardnumber" required />
+//       <span className="d-flex justify-content-between checkout-payment-title">
+//         <label>Expiration</label>
+//         <label>CVC</label>
+//       </span>
+//       <span className="d-flex justify-content-start">
+//         <input className="form-control input-field-payment-myc" type="number" placeholder="MM" ref="cardinfomonth" required />
+//         <input className="form-control input-field-payment-myc" type="number" placeholder="YYYY" ref="cardinfoyear" required />
+//         <input className="form-control input-field-payment-myc" type="number" placeholder="cvc" ref="cardinfocvc" required />
+//       </span>
+//     </form>
+//   </div>
+// </div>
+// <div className="checkout-products d-flex flex-column justify-content-around">
+//   <p>You have no items in your cart, go back and add some stuff to your cart</p>
+// </div>

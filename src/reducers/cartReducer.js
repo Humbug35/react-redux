@@ -7,7 +7,8 @@ import { ADD_TO_CART ,
 
 const initialState = {
     cart: [],
-    error: null
+    error: null,
+    isValid: null
 };
 
 
@@ -26,7 +27,8 @@ export const cartReducer = (state = initialState, action) => {
         case POST_ORDER_SUCCESS:
           return {
             ...state,
-            cart: []
+            cart: [],
+            isValid: true
           }
         case POST_ORDER_FAIL:
           return {

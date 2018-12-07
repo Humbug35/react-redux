@@ -73,11 +73,8 @@ label{
  .send-order-total{
    width: 80%;
  }
-.route-order-path-div , .route-checkout-path-div{
-  min-height: 73.1vh;
-}
-.route-products-path-div{
-  min-height: 73.1vh;
+.route-order-path-div , .route-checkout-path-div , .route-products-path-div{
+  min-height: 76.2vh;
 }
 .login-background{
   background-color: #2E3373;

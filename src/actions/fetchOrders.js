@@ -50,7 +50,6 @@ export const fetchOrders = (orderId = '') => {
 
   export const postOrder = (order) => {
     return dispatch => {
-      console.log('Order', order)
       dispatch(postOrderRequest())
       return fetch('http://localhost:5000/orders', {
         method: 'POST',
@@ -59,11 +58,9 @@ export const fetchOrders = (orderId = '') => {
       })
       .then(res => res.json())
       .then(order => {
-        console.log('Thenorder', order)
         dispatch(postOrderSuccess(order))
       })
       .catch(error => {
-        console.log('Catch')
         dispatch(postOrderFail(error))
       })
     }
