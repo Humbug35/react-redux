@@ -1,6 +1,7 @@
 import { FETCH_ORDERS_REQUEST ,
          FETCH_ORDERS_RECEIVE ,
-         FETCH_ORDERS_FAIL } from '../actions/types';
+         FETCH_ORDERS_FAIL ,
+       } from '../actions/types';
 
 
 

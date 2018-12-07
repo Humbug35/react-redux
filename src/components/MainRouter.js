@@ -42,7 +42,7 @@ const OrderRoute = () => (
 const ProductRoute = () => (
   <div>
     <Header />
-    <div className="d-flex route-products-path-div">
+    <div className="d-flex justify-content-center route-products-path-div">
       <Route exact path="/products" component={ProductList} />
       <Route path="/products/:productId" component={SingleProduct} />
     </div>
@@ -51,9 +51,9 @@ const ProductRoute = () => (
 )
 
 const CategoryRoute = () => (
-  <div className="routediv">
+  <div>
     <Header />
-    <div className="d-flex route-products-path-div">
+    <div className="d-flex route-checkout-path-div">
       <Route path="/category/:category" component={Category} />
     </div>
     <Footer />
@@ -63,7 +63,7 @@ const CategoryRoute = () => (
 const CheckoutRoute = () => (
   <div>
     <Header />
-    <div>
+    <div className="route-checkout-path-div">
       <Route path="/checkout" component={CheckOut} />
     </div>
     <Footer />
