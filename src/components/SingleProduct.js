@@ -62,11 +62,12 @@ class SingleProduct extends Component {
     if(product.length === 0) {
       return null
     }
+    let image = product.productImage.replace('\\', '/')
     return (
       <div className="d-flex">
 
         <div className="mt-5">
-          <img className="single-product-img mt-5 pl-5" src="https://picsum.photos/200/100/?random" alt="product" />
+          <img className="single-product-img mt-5 pl-5" src={image ? `http://localhost:5000/` + image : "https://picsum.photos/200/100/?random" } alt="product" />
         </div>
         <div className="container mt-5 ml-5 single-product-textcontent">
           <h3 className="mt-5">{product.product_name}</h3>
