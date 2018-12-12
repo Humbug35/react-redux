@@ -21,10 +21,14 @@ componentDidUpdate (prevProps) {
     }
     const categoryTitle = this.props.match.params.category;
     const products = this.props.categoryProducts.products.map((product, index) => {
+      let image;
+      if(product.productImage) {
+          image = product.productImage.replace('\\', '/')
+      }
       return (
         <div className="card col-3 offset-1 mb-5 product-card" key={index.toString()}>
           <NavLink to={"/products/" + product._id} className="card-body product-card product-card-body">
-            <img className="card-img-top product-card-img" src="https://picsum.photos/200/300/?random" alt="product" />
+            <img className="card-img-top product-card-img" src={image ? "http://localhost:5000/" + image : "https://picsum.photos/200/300/?random"} alt="product" />
             <div className="d-flex flex-column">
               <h5 className="card-title product-card-text">{product.product_name}</h5>
               <p className="card-text product-card-text">Category: {product.Category.charAt(0).toUpperCase() + product.Category.substr(1)}</p>

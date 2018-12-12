@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { postOrder } from '../actions/fetchOrders';
 
 
@@ -15,22 +16,6 @@ class CheckOut extends Component {
   }
   getInputValues(e) {
     e.preventDefault();
-    if(this.refs.userinfofullname.value === '' ||
-       this.refs.email.value === '' ||
-       this.refs.phone.value === '' ||
-       this.refs.streetaddress.value === '' ||
-       this.refs.city.value === '' ||
-       this.refs.zipcode.value === '' ||
-       this.refs.country.value === '' ||
-       this.refs.paymentfullname.value === '' ||
-       this.refs.cardnumber.value === '' ||
-       this.refs.cardinfomonth.value === '' ||
-       this.refs.cardinfoyear.value === '' ||
-       this.refs.cardinfocvc.value === '') {
-         return this.setState({
-           isValid: false
-         })
-       } else {
          let totalOrderPrice = 0;
          this.props.cart.cart.map(product => {
            let test = product.quantity * product.price
@@ -70,7 +55,7 @@ class CheckOut extends Component {
             isOpen: !this.state.isOpen
           })
 
-       }
+
 
   }
   handleChange(e) {
@@ -104,8 +89,9 @@ class CheckOut extends Component {
     if(!this.state.isOpen) {
     if(cart.length === 0) {
       return (
-        <div className="d-flex">
-          <p className="d-flex justify-content-center">Your cart is empty, go back and add some stuff to your cart</p>
+        <div className="d-flex justify-content-center align-items-center no-items-in-cart">
+          <p>Your cart is empty, click <NavLink to="/products">here</NavLink> and add some stuff to your cart</p>
+
         </div>
       )
     } else {
@@ -134,7 +120,6 @@ class CheckOut extends Component {
               </ul>
             </div>
             <div className="tab-content d-flex flex-column align-items-center justify-content-start" id="pills-TabContent">
-              { this.state.isValid === false ? <p>All fields are required</p> : null }
               <form className="tab-pane fade show active checkout-div-one" id="pills-home" ref="userinfoform" role="tabpanel" aria-labelledby="pills-home-tab">
                 <label htmlFor="fullname">Full Name</label>
                 <input className="form-control form-control-log" type="text" id="fullname" ref="userinfofullname" required onChange={this.handleChange.bind(this)} />
@@ -189,7 +174,8 @@ class CheckOut extends Component {
       return (
         <Modal isOpen={this.state.isOpen} toggle={this.getInputValues.bind(this)}>
         <ModalBody>
-          Your order are send
+          <p>Your order are send</p>
+          <p> Your orderId is: {this.props.cart.orderId}</p>
         </ModalBody>
         <ModalFooter>
           <Button color="success" onClick={this.toggle.bind(this)}>OK</Button>{' '}

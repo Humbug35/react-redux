@@ -5,6 +5,7 @@ import SingleOrder from './SingleOrder';
 import SignUp from './Register';
 //import Login from './Login';
 import AdminLogin from './AdminLogin';
+import AddProduct from './AddProduct';
 import About from './About';
 import AuthNavBar from './AuthNavbar';
 import ProductList from './Products';
@@ -25,6 +26,16 @@ import { PrivateRoute } from './PrivateRoute';
 const AdminLoginRoute = () => (
   <div className="login-page-div login-background">
      <Route path="/admin-login" component={AdminLogin} />
+  </div>
+)
+
+const AddProductRoute = () => (
+  <div>
+    <AuthNavBar />
+    <div className="route-order-path-div">
+      <PrivateRoute path="/add-product" component={AddProduct} />
+    </div>
+    <Footer />
   </div>
 )
 
@@ -72,9 +83,9 @@ const CheckoutRoute = () => (
 
 const AboutRoute = () => (
   <div>
-    <AuthNavBar />
+    <Header />
     <div>
-      <PrivateRoute path="/about" component={About} />
+      <Route path="/about" component={About} />
     </div>
     <Footer />
   </div>
@@ -106,6 +117,7 @@ class MainRouter extends Component {
             <Route path="/products" component={ProductRoute} />
             <Route path="/category" component={CategoryRoute} />
             <Route path="/orders" component={OrderRoute} />
+            <Route path="/add-product" component={AddProductRoute} />
             <Route path="/about" component={AboutRoute} />
             <Route path="/checkout" component={CheckoutRoute} />
             <Route component={ErrorPage} />

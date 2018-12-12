@@ -19,6 +19,7 @@ class AuthNavBar extends Component {
           <NavLink className="navbar-brand navbar-width" to="/orders"><img src={logo} alt="logo"/></NavLink>
           <div className="navbar-nav navbar-links">
             <NavLink className="nav-item nav-link" to="/orders">All Orders</NavLink>
+            <NavLink className="nav-item nav-link" to="/add-product">Add New Product</NavLink>
             <NavLink className="nav-item nav-link" to="/about">About</NavLink>
             <button onClick={this.logOut.bind(this)}>Log Out</button>
           </div>
