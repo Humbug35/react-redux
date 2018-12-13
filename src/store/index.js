@@ -7,7 +7,6 @@ import { cartReducer as cart } from '../reducers/cartReducer';
 import { adminLoginReducer as adminUser } from '../reducers/adminLoginReducer';
 import { combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-//import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 

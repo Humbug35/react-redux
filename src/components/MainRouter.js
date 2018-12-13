@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AllOrder from './AllOrder';
 import SingleOrder from './SingleOrder';
 import SignUp from './Register';
-//import Login from './Login';
 import AdminLogin from './AdminLogin';
 import AddProduct from './AddProduct';
 import About from './About';
@@ -16,12 +15,6 @@ import Header from './Header';
 import CheckOut from './CheckOut';
 import { PrivateRoute } from './PrivateRoute';
 
-
-// const LoginRoute = () => (
-//   <div className="login-page-div login-background">
-//      <Route path="/" component={Login} />
-//   </div>
-// )
 
 const AdminLoginRoute = () => (
   <div className="login-page-div login-background">
@@ -98,12 +91,6 @@ const ErrorPage = () => (
   </div>
 )
 
-// const accessDenied = () => (
-//   <div>
-//     <div>You must be logged in to see this page</div>
-//     <Redirect to="/" />
-//   </div>
-// )
 
 
 class MainRouter extends Component {
@@ -111,7 +98,6 @@ class MainRouter extends Component {
     return (
       <BrowserRouter>
           <Switch>
-
             <Route exact path="/admin-login" component={AdminLoginRoute} />
             <Route path="/signup" component={SignUp} />
             <Route path="/products" component={ProductRoute} />

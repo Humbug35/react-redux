@@ -82,8 +82,6 @@ class CheckOut extends Component {
       isOpen: !this.state.isOpen
     })
   }
-
-
   render() {
     const { cart } = this.props.cart;
     if(!this.state.isOpen) {
@@ -101,7 +99,7 @@ class CheckOut extends Component {
         return (
           <div key={index.toString()} className="d-flex justify-content-around align-items-center mb-1">
             <p className="mb-0 checkout-cart-product-name">{product.product_name}</p>
-            <p className="mb-0 checkout-cart-product-price">{product.price}</p>
+            <p className="mb-0 checkout-cart-product-price">${product.price}</p>
             <input type="number" ref="quantity" defaultValue={product.quantity} className="checkout-quantity-product" />
           </div>
         )
@@ -190,58 +188,3 @@ const mapStateToProps = state => ({
   cart: state.cart
 })
 export default connect(mapStateToProps)(CheckOut);
-
-
-
-
-
-
-// <div className="d-flex flex-column checkout-user-info">
-//   <div className="d-flex justify-content-center checkout-nav-div">
-//     <ul className="nav nav-pills d-flex justify-content-around checkout-nav" id="pills-tab" role="tablist">
-//       <li className="nav-item">
-//         <a className="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">UserInfo</a>
-//       </li>
-//       <li className="nav-item">
-//         <a className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Payment</a>
-//       </li>
-//     </ul>
-//   </div>
-//   <div className="tab-content d-flex flex-column align-items-center justify-content-start" id="pills-TabContent">
-//     { this.state.isValid === false ? <p>All fields are required</p> : null }
-//     <form className="tab-pane fade show active checkout-div-one" id="pills-home" ref="userinfoform" role="tabpanel" aria-labelledby="pills-home-tab">
-//       <label htmlFor="fullname">Full Name</label>
-//       <input className="form-control form-control-log" type="text" id="fullname" ref="userinfofullname" required />
-//       <label htmlFor="email">Email</label>
-//       <input className="form-control form-control-log" type="email" id="email" ref="email" required />
-//       <label htmlFor="phone">PhoneNumber</label>
-//       <input className="form-control form-control-log" type="number" id="phone" ref="phone" required />
-//       <label htmlFor="street">Street Address</label>
-//       <input className="form-control form-control-log" type="text" id="street" ref="streetaddress" required />
-//       <label htmlFor="city">City</label>
-//       <input className="form-control form-control-log" type="text" id="city" ref="city" required />
-//       <label htmlFor="zipcode">Zip Code</label>
-//       <input className="form-control form-control-log" type="number" id="zipcode" ref="zipcode" required />
-//       <label htmlFor="country">Country</label>
-//       <input className="form-control form-control-log" type="text" id="country" ref="country" required />
-//     </form>
-//     <form className="tab-pane fade checkout-div-two" id="pills-profile" ref="cardinfoform" role="tabpanel" aria-labelledby="pills-profile-tab">
-//       <label htmlFor="card-name">Full Name</label>
-//       <input className="form-control mb-3 input-field-payment" type="text" id="card-name" ref="paymentfullname" required />
-//       <label htmlFor="card-number">Card Number</label>
-//       <input className="form-control mb-3 input-field-payment" type="number" id="card-number" ref="cardnumber" required />
-//       <span className="d-flex justify-content-between checkout-payment-title">
-//         <label>Expiration</label>
-//         <label>CVC</label>
-//       </span>
-//       <span className="d-flex justify-content-start">
-//         <input className="form-control input-field-payment-myc" type="number" placeholder="MM" ref="cardinfomonth" required />
-//         <input className="form-control input-field-payment-myc" type="number" placeholder="YYYY" ref="cardinfoyear" required />
-//         <input className="form-control input-field-payment-myc" type="number" placeholder="cvc" ref="cardinfocvc" required />
-//       </span>
-//     </form>
-//   </div>
-// </div>
-// <div className="checkout-products d-flex flex-column justify-content-around">
-//   <p>You have no items in your cart, go back and add some stuff to your cart</p>
-// </div>

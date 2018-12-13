@@ -9,42 +9,6 @@ class SingleProduct extends Component {
     this.props.dispatch(fetchProducts(this.props.match.params.productId))
   }
   addProductToCart(product) {
-    // let cart = JSON.parse(localStorage.getItem('cartProducts')) || [];
-    // let quantity = Number(this.refs.quantity.value)
-    // let replaceDollar = product.price.replace('$', '');
-    // let newPrice = Number(replaceDollar);
-    // if(cart.length === 0) {
-    //   let newProduct = {
-    //     _id: product._id,
-    //     product_name: product.product_name,
-    //     price: newPrice,
-    //     quantity: quantity,
-    //     subTotal: quantity * newPrice
-    //   }
-    //   cart.push(newProduct);
-    //   localStorage.setItem('cartProducts', JSON.stringify(cart))
-    // } else {
-    //   let existingProduct = cart.find(existingProduct => {
-    //     return existingProduct._id === product._id
-    //   })
-    //   if(existingProduct) {
-    //     existingProduct.quantity = existingProduct.quantity + quantity;
-    //     existingProduct.subTotal = existingProduct.quantity * newPrice;
-    //     localStorage.setItem('cartProducts', JSON.stringify(cart))
-    //   } else {
-    //     let existingProduct = {
-    //       _id: product._id,
-    //       product_name: product.product_name,
-    //       price: newPrice,
-    //       quantity: quantity,
-    //       subTotal: quantity * newPrice
-    //     }
-    //     cart.push(existingProduct)
-    //     localStorage.setItem('cartProducts', JSON.stringify(cart))
-    //   }
-    // }
-    // console.log('cart', cart)
-  //   console.log('Product', product)
   let replaceDollar = product.price.replace('$', '');
   let newPrice = Number(replaceDollar);
   const newProduct = {
@@ -62,10 +26,12 @@ class SingleProduct extends Component {
     if(product.length === 0) {
       return null
     }
-    let image = product.productImage.replace('\\', '/')
+    let image;
+    if(product.productImage) {
+      image = product.productImage.replace('\\', '/')
+    }
     return (
       <div className="d-flex">
-
         <div className="mt-5">
           <img className="single-product-img mt-5 pl-5" src={image ? `http://localhost:5000/` + image : "https://picsum.photos/200/100/?random" } alt="product" />
         </div>

@@ -6,9 +6,6 @@ import logo from '../images/newLogo2.png';
 class AuthNavBar extends Component {
   logOut() {
     sessionStorage.removeItem('token')
-    this.setState({
-      isToken: false
-    })
   }
   render() {
     if(!sessionStorage.getItem('token')) {
@@ -20,8 +17,7 @@ class AuthNavBar extends Component {
           <div className="navbar-nav navbar-links">
             <NavLink className="nav-item nav-link" to="/orders">All Orders</NavLink>
             <NavLink className="nav-item nav-link" to="/add-product">Add New Product</NavLink>
-            <NavLink className="nav-item nav-link" to="/about">About</NavLink>
-            <button onClick={this.logOut.bind(this)}>Log Out</button>
+            <NavLink to="/admin-login"><button onClick={this.logOut.bind(this)}>Log Out</button></NavLink>
           </div>
       </nav>
     )

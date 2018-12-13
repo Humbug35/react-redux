@@ -21,18 +21,15 @@ class AddProduct extends Component {
          !this.refs.productcategory.value ||
          this.refs.productcategory.value === ''
     ) {
-      console.log('False')
       this.setState({
         isValid: 'No field'
       })
     } else {
-      console.log('True')
       for(let i = 0; i < format.length; i++) {
         if(this.refs.productimage.files[0].name.includes(format[i])) {
-          console.log('TrueTure')
           let form = new FormData();
           form.append('product_name', this.refs.productname.value)
-          form.append('price', this.refs.productprice.value)
+          form.append('price', `$${this.refs.productprice.value}`)
           form.append('Category', this.refs.productcategory.value)
           form.append('productimage', this.refs.productimage.files[0])
           fetch('http://localhost:5000/products', {
@@ -41,7 +38,6 @@ class AddProduct extends Component {
             body: form
           })
           .then(res => {
-            console.log('Res', res)
             if(res.ok) {
               this.refs.form.reset()
               this.setState({
@@ -53,7 +49,6 @@ class AddProduct extends Component {
         }
       }
     } else {
-      console.log('Wrong file')
       this.setState({
         isValid: 'No file'
       })
