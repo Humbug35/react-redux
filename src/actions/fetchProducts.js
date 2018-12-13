@@ -50,15 +50,15 @@ export const fetchProducts = (productId = '', query = '') => {
         .then(res => res.json())
         .then(products => {
           if(productId === '') {
-            let bestSellerProducts = [];
-            let bestSellerOne = products[Math.floor(Math.random() * products.length)]
-            let bestSellerTwo = products[Math.floor(Math.random() * products.length)]
-            let bestSellerThree = products[Math.floor(Math.random() * products.length)]
-            let bestSellerFour = products[Math.floor(Math.random() * products.length)]
-            let bestSellerFive = products[Math.floor(Math.random() * products.length)]
-            let bestSellerSix = products[Math.floor(Math.random() * products.length)]
-            bestSellerProducts.push(bestSellerOne, bestSellerTwo, bestSellerThree, bestSellerFour, bestSellerFive, bestSellerSix)
-              dispatch(fetchProductsReceive(bestSellerProducts))
+            let frontPageProducts = [];
+            let frontPagerOne = products[Math.floor(Math.random() * products.length)]
+            let frontPageTwo = products[Math.floor(Math.random() * products.length)]
+            let frontPageThree = products[Math.floor(Math.random() * products.length)]
+            let frontPageFour = products[Math.floor(Math.random() * products.length)]
+            let frontPageFive = products[Math.floor(Math.random() * products.length)]
+            let frontPageSix = products[Math.floor(Math.random() * products.length)]
+            frontPageProducts.push(frontPagerOne, frontPageTwo, frontPageThree, frontPageFour, frontPageFive, frontPageSix)
+              dispatch(fetchProductsReceive(frontPageProducts))
           } else {
             dispatch(fetchProductsReceive(products))
           }
@@ -67,25 +67,5 @@ export const fetchProducts = (productId = '', query = '') => {
           dispatch(fetchProductsFail(error))
         })
     }
-    // return fetch('http://localhost:5000/products/'+productId)
-    //   .then(res => res.json())
-    //   .then(products => {
-    //     if(productId === '') {
-    //       let bestSellerProducts = [];
-    //       let bestSellerOne = products[Math.floor(Math.random() * products.length)]
-    //       let bestSellerTwo = products[Math.floor(Math.random() * products.length)]
-    //       let bestSellerThree = products[Math.floor(Math.random() * products.length)]
-    //       let bestSellerFour = products[Math.floor(Math.random() * products.length)]
-    //       let bestSellerFive = products[Math.floor(Math.random() * products.length)]
-    //       let bestSellerSix = products[Math.floor(Math.random() * products.length)]
-    //       bestSellerProducts.push(bestSellerOne, bestSellerTwo, bestSellerThree, bestSellerFour, bestSellerFive, bestSellerSix)
-    //         dispatch(fetchProductsReceive(bestSellerProducts))
-    //     } else {
-    //       dispatch(fetchProductsReceive(products))
-    //     }
-    //   })
-    //   .catch(error => {
-    //     dispatch(fetchProductsFail(error))
-    //   })
   }
 }
