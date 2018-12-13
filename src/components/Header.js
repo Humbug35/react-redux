@@ -13,7 +13,6 @@ const Header = (props) => {
           <div className="row d-flex nav-links">
             <div className="navbar-nav navbar-links">
               <Categories />
-              <NavLink className="nav-item nav-link" to="/about">About</NavLink>
             </div>
             <div className="d-flex checkout-link justify-content-end">
               <NavLink className="nav-item nav-link" to="/checkout"><i className="fa fa-shopping-cart"></i><span className="ml-2 h3">{productsInCart}</span></NavLink>
@@ -32,7 +31,6 @@ const Header = (props) => {
           <div className="row d-flex nav-links">
             <div className="navbar-nav navbar-links">
               <Categories />
-              <NavLink className="nav-item nav-link" to="/about">About</NavLink>
             </div>
             <div className="d-flex checkout-link justify-content-end">
               <NavLink className="nav-item nav-link" to="/checkout"><i className="fa fa-shopping-cart"></i><span className="ml-2 h3">{productsInCart}</span></NavLink>
