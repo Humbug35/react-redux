@@ -3,13 +3,13 @@ import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { postOrder } from '../actions/fetchOrders';
+import { removeFromCart } from '../actions/cart';
 
 
 class CheckOut extends Component {
   constructor() {
     super();
     this.state = {
-      isValid: null,
       isOpen: false,
       isDisabled: true
     }
@@ -51,7 +51,6 @@ class CheckOut extends Component {
 
           this.props.dispatch(postOrder(order))
           this.setState({
-            isValid: true,
             isOpen: !this.state.isOpen
           })
   }
@@ -74,11 +73,27 @@ class CheckOut extends Component {
          })
        }
   }
+  removeItem(productId) {
+    this.props.dispatch(removeFromCart(productId))
+  }
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     })
   }
+  noDuplicatesInCart(cart) {
+            let cartObj = {}
+            cart.forEach((product) => {
+                const id = product._id;
+                if (cartObj[id]) {
+                    cartObj[id].quantity = cartObj[id].quantity + product.quantity
+                    cartObj[id].totalPrice = cartObj[id].price * cartObj[id].quantity
+                } else {
+                    cartObj[id] = {quantity: 1, ...product}
+                }
+            })
+            return Object.values(cartObj)
+        }
   render() {
     const { cart } = this.props.cart;
     if(!this.state.isOpen) {
@@ -90,14 +105,16 @@ class CheckOut extends Component {
         </div>
       )
     } else {
+      const productsCart = this.noDuplicatesInCart(cart)
       let totalPrice = 0;
-      const cartProducts = cart.map((product, index) => {
+      const cartProducts = productsCart.map((product, index) => {
         totalPrice = totalPrice + product.totalPrice
         return (
           <div key={index.toString()} className="d-flex justify-content-around align-items-center mb-1">
             <p className="mb-0 checkout-cart-product-name">{product.product_name}</p>
             <p className="mb-0 checkout-cart-product-price">${product.price}</p>
             <input type="number" ref="quantity" defaultValue={product.quantity} className="checkout-quantity-product" />
+            <i className="fa fa-times btn" onClick={this.removeItem.bind(this, product._id)}></i>
           </div>
         )
       })
@@ -150,7 +167,7 @@ class CheckOut extends Component {
           </div>
           <div className="checkout-products d-flex flex-column justify-content-around">
             <div className="checkout-products-div d-flex flex-column">
-              <div className="d-flex justify-content-around">
+              <div className="d-flex justify-content-around mr-5">
                 <p>Product Name</p>
                 <p>Price</p>
                 <p>Quantity</p>
@@ -159,7 +176,7 @@ class CheckOut extends Component {
             </div>
             <div className="d-flex justify-content-between send-order-total">
               <button className="btn btn-success place-order-button" disabled={this.state.isDisabled} onClick={this.getInputValues.bind(this)}>Send Order</button>
-              <p className="d-flex align-items-center mb-0">Total: ${!this.state.isValid ? totalPrice.toFixed(2) : 0}</p>
+              <p className="d-flex align-items-center mb-0">Total: ${totalPrice.toFixed(2)}</p>
             </div>
           </div>
 
