@@ -1,7 +1,8 @@
 import { ADD_TO_CART ,
         POST_ORDER_REQUEST ,
         POST_ORDER_SUCCESS ,
-        POST_ORDER_FAIL } from '../actions/types';
+        POST_ORDER_FAIL ,
+        REMOVE_FROM_CART } from '../actions/types';
 
 
 
@@ -20,6 +21,11 @@ export const cartReducer = (state = initialState, action) => {
           return {
             ...state,
             cart: state.cart.concat(action.payload)
+          }
+        case REMOVE_FROM_CART:
+          return {
+            ...state,
+            cart: state.cart.filter(product => product._id !== action.payload)
           }
         case POST_ORDER_REQUEST:
           return {

@@ -70,7 +70,7 @@ class AddProduct extends Component {
           <input type="text" name="productcategory" id="product-category" ref="productcategory" />
           <label htmlFor="product-image">Product Image</label>
           <input type="file" name="productimage" id="product-image" ref="productimage" />
-          <input type="submit" />
+          <input type="submit" value="Send" />
         </form>
       </div>
     )
