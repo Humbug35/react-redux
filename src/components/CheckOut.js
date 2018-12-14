@@ -54,9 +54,6 @@ class CheckOut extends Component {
             isValid: true,
             isOpen: !this.state.isOpen
           })
-
-
-
   }
   handleChange(e) {
     e.preventDefault();
