@@ -5,7 +5,6 @@ import SingleOrder from './SingleOrder';
 import SignUp from './Register';
 import AdminLogin from './AdminLogin';
 import AddProduct from './AddProduct';
-import About from './About';
 import AuthNavBar from './AuthNavbar';
 import ProductList from './Products';
 import SingleProduct from './SingleProduct';
@@ -74,16 +73,6 @@ const CheckoutRoute = () => (
   </div>
 )
 
-const AboutRoute = () => (
-  <div>
-    <Header />
-    <div>
-      <Route path="/about" component={About} />
-    </div>
-    <Footer />
-  </div>
-)
-
 const ErrorPage = () => (
   <div>
     <h1>Page Not Found</h1>
@@ -104,7 +93,6 @@ class MainRouter extends Component {
             <Route path="/category" component={CategoryRoute} />
             <Route path="/orders" component={OrderRoute} />
             <Route path="/add-product" component={AddProductRoute} />
-            <Route path="/about" component={AboutRoute} />
             <Route path="/checkout" component={CheckoutRoute} />
             <Route component={ErrorPage} />
           </Switch>
